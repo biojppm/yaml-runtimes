@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# tree handler:
+# YAML -> rapidyaml tree -> YAML/JSON
+
+#  -h,--help              print this message
+#  -e [N],--reserve [N]   reserve tree size before parsing (default: N=%d):
+#                         0=do not reserve
+#                         1=reserve by estimating size
+#                         all other values=reserve with value
+#  -r,--resolve           resolve references (default: %s)
+#  -k,--keep-refs         keep refs and anchors after resolving (default: %s)
+#  -p,--print-tree        print parsed rapidyaml tree before emitting (default: %s)
+#  -q,--quiet             do not emit (default: %s)
+#  -j,--json              emit json instead of yaml (default: %s)
+#  -s,--string            emit to string before dumping to stdout/file.
+#                         otherwise, emit directly to stdout (default: %s)
+#  -t,--timed             time sections (print timings to stderr) (default: %s)
+#  -o,--output <filename> emit to the given filename (default: %s)
+
+if [ ! -t 0 ]; then
+    # if input comes from stdin, ryml wants a `-`
+    ryml-parse-emit --reserve 1 --resolve $@ -
+else
+    ryml-parse-emit --reserve 1 --resolve $@
+fi

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# tree handler:
+# YAML -> rapidyaml tree -> test suite events
+
+if [ ! -t 0 ]; then
+    # if input comes from stdin, ryml wants a `-`
+    ryml-yaml-events ts_tree $@ -
+else
+    ryml-yaml-events ts_tree $@
+fi

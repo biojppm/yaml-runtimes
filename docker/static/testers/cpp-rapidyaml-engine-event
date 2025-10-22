@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# ints handler:
+# YAML -> rapidyaml int events -> test suite events
+
+if [ ! -t 0 ]; then
+    # if input comes from stdin, ryml wants a `-`
+    ryml-yaml-events ts_ints $@ -
+else
+    ryml-yaml-events ts_ints $@
+fi
